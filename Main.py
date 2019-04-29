@@ -174,18 +174,18 @@ if __name__ == '__main__':
     costInfo_frame = ttk.Frame(rightInfo_frame, style="borderless.TFrame", width=400, height=400)
     costInfoUnderline_line = ttk.Frame(costInfo_frame, style="line.TFrame", width=250, height=1)
 
-    ##### Header Button #####
+	##### Header Button #####
     gifdir = "images/"
-    headerImg = tk.PhotoImage(file = gifdir + "metafix.png")
+    headerImg = tk.PhotoImage(file = gifdir + "KENSBAGELS.png")
     headerImg = headerImg.subsample(5)
-    tk.Label(root, image = headerImg, bg = 'black', height = 60).grid(sticky="nsew", columnspan=5)
+    tk.Label(root, image = headerImg, bg = 'green', height = 90).grid(sticky="nsew", columnspan=5)
     root.grid_columnconfigure(0, weight = 1)
 
     ##### Product Frame #####
-    product_frame.grid_configure(column=2, columnspan=3, pady=30, padx=(110,30), sticky="w")
+    product_frame.grid_configure(columnspan=3, pady=30, padx=(110,30), sticky="w")
     var = tk.IntVar()
-    versions = 'RTX 2060 -- $400.00', 'RTX 2080 -- $800.00', 'RTX 2070 -- $600.00', 'RTX 2080 Ti -- $1200.00'
-    imageName = "2060.png", "2080.png", "2070.png", "2080 ti.png"
+    versions = 'Bagel 1 -- $2.00', 'Bagel 2 -- $2.00', 'Bagel 3 -- $2.00', 'Bagel 4 -- $2.00', 'Bagel 5 -- $2.00', 'Bagel 6 -- $2.00' 
+    imageName = "bagel1.png", "bagel2.png", "bagel3.png", "bagel4.png", "bagel5.png", "bagel6.png"
     gifdir = "images/"
     imag = []
     i = 1
@@ -194,13 +194,13 @@ if __name__ == '__main__':
 
     #loop to display the product radio buttons and picture
     for version in versions:
-        if i == 3:
+        if i % 4 == 0:
             rowNo = 2
             colNo = 0
         ttk.Radiobutton(product_frame, text = version, command = onPress, value = i, variable = var, style="My.TRadiobutton", cursor="hand2").grid(row=rowNo, column=colNo, pady=(10,0), padx=60, sticky="NW")
         photo = gifdir + imageName[i - 1]
         img = Image.open(photo)
-        img = img.resize((200, 230), Image.ANTIALIAS)
+        img = img.resize((80, 80), Image.ANTIALIAS)
         photoImage = ImageTk.PhotoImage(img)
         imag.append(photoImage)
         ttk.Label(product_frame, image = imag[i - 1]).grid(row=rowNo + 1, column = colNo, pady=(10,20), padx=60, sticky="nw")
