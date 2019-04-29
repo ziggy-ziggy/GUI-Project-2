@@ -1,13 +1,12 @@
 #**********************************************
-#Students   : Austin, Jamison, Jacob, Justin
+#Students   : Jacob, Mark, Viraj, Cole
 #Class      : Human Factors and User Interface
 #Instructor : Gamradt
-#Assignment : 2
-#Due Date   : 3/13/2019
+#Assignment : 4
+#Due Date   : 5/3/2019
 #**********************************************
-#Description: This program implements a store front
-#for a company that sells graphics cards along with 
-#accessories for graphics cards.
+#Description: This is an implementaiton for Ken's
+#Coffee and Bagels
 #**********************************************
 
 
@@ -18,13 +17,13 @@ from PIL import Image, ImageTk
 
 #functions for menu
 def helpBox():
-    messagebox.showinfo('Help', 'Welcome to our store!\n 1. Select a product\n 2. Add accessories\n 3. Enter information')
+    messagebox.showinfo('Help', "Welcome to Ken's Coffee and Bagels !\n 1. Select a bagel\n 2. Add shmears\n 3. Add to cart")
 def studentBox():
-    messagebox.showinfo('Students', 'Austin Hochhalter\n Justin Glenn\n Jamison French\n Jacob Simondet\n')
+    messagebox.showinfo('Students', 'Jacob\nMark\nViraj\nCole')
 def courseBox():
     messagebox.showinfo('Course', 'SE330: Human Factors & User Interface')
 def AssignmentBox():
-    messagebox.showinfo('Assignment', 'Assignment 1 and 2 - Project 1')
+    messagebox.showinfo('Assignment', 'Assignment 4 and 5 - Project 2')
 
 #menu function
 def makeMenu(root):
@@ -44,7 +43,7 @@ def makeMenu(root):
 ##### Functions that check states #####
 #######################################
 def checkButtons(root):
-    buttons = 'GPU Support Bracket -- $15.00', 'SLI Bridge -- $50.00', 'Thermal Paste -- $20.00', 'GPU Backplate (Nickel) -- $50.00'
+    buttons = 'Strawbery Shmear -- $1.00', 'Blueberry Shmear -- $1.00', 'Cream Cheese -- $1.00', 'Butter -- $50.00'
     for button in buttons:
         row = ttk.Frame(root)
         row.grid()
@@ -76,24 +75,6 @@ def checkAmount():
         print (list(map((lambda num: num.get()), amounts)))
 #######################################
 
-##### Confirmation Window #####
-def confirmation(entries):
-    entryTitles = 'Subtotal Price','Discount', 'Tax', 'Total Price', 'Full name', 'Street address', 'City', 'State', 'Zip Code', 'Credit Card Number', 'CVC', 'Email'
-    i = 0
-    eRow = 0
-    for entry in entries:
-        if i == 4 or i == 0:
-            ttk.Label(confirm_frame, text=entryTitles[i], style="My.TLabel").grid(row=eRow, column = 0, pady=(20,0), padx=20, sticky="nsw")
-            ttk.Label(confirm_frame, text=entries[i].get(), style="My.TLabel").grid(row=eRow, column = 1, pady=(20,0), padx=20, sticky="nsew")
-        else:
-            ttk.Label(confirm_frame, text=entryTitles[i], style="My.TLabel").grid(row=eRow, column = 0, pady=2, padx=20, sticky="nsw")
-            ttk.Label(confirm_frame, text=entries[i].get(), style="My.TLabel").grid(row=eRow, column = 1, pady=2, padx=20, sticky="nsew")
-        eRow = eRow + 1
-        print('Input => "%s"' % entry.get())
-        i = i + 1
-        eRow = eRow + 1
-    ttk.Button(confirm_frame, text = 'Confirm Order', cursor="hand2", command=confirm.destroy).grid(column=0, pady=(5, 20), columnspan=2, sticky="ns")
-
 ##### Fills entries located in Information section #####
 def makeform(root, fields):
     entries = []
@@ -113,13 +94,9 @@ def updateCosts(primary, accessories = None):
     print(primary)
     if(primary is not 0):
         if(primary is 1):
-            primaryCost = 400
-        elif(primary is 2):
-            primaryCost = 800
-        elif(primary is 3):
-            primaryCost = 600
-        elif(primary is 4):
-            primaryCost = 1200
+            primaryCost = 1
+        else:
+            primaryCost = 1
         accessoryCost = 0
 
         if(accessories is not None):
@@ -141,7 +118,7 @@ def updateCosts(primary, accessories = None):
     else:
         costEntries[0].config(state=tk.NORMAL)
         costEntries[0].delete(0, tk.END)
-        costEntries[0].insert(0, "Must have a graphics card selected")
+        costEntries[0].insert(0, "Must have a bagel selected")
         costEntries[0].config(state=tk.DISABLED)
 
 ##### Main #####
@@ -167,11 +144,13 @@ if __name__ == '__main__':
     scale_style.configure("My.Horizontal.TScale", background="#ffffff")
 
     ##### Frames #####
-    product_frame = ttk.Frame(root, style="My.TFrame", width=1200, height=675)
-    rightInfo_frame = ttk.Frame(root, style = "My.TFrame", width=400, height=675)
-    addOn_frame = ttk.Frame(rightInfo_frame, style="borderless.TFrame", width=300, height=200)
+    product_frame = ttk.Frame(root, style="My.TFrame", width=1400, height=675)
+    cartInfo_frame = ttk.Frame(root, style = "My.TFrame", width=400, height=675)
+    addOn_frame = ttk.Frame(product_frame, style="borderless.TFrame", width=300, height=200)
     addOnUnderline_line = ttk.Frame(addOn_frame, style="line.TFrame", width=250, height=1)
-    costInfo_frame = ttk.Frame(rightInfo_frame, style="borderless.TFrame", width=400, height=400)
+    checkButtons_frame = ttk.Frame(product_frame, style="borderless.TFrame", width=300, height=200)
+    costInfo_frame = ttk.Frame(cartInfo_frame, style="borderless.TFrame", width=400, height=400)
+    list_frame = ttk.Frame(cartInfo_frame, style="borderless.TFrame", width=400, height=400)
     costInfoUnderline_line = ttk.Frame(costInfo_frame, style="line.TFrame", width=250, height=1)
 
 	##### Header Button #####
@@ -182,7 +161,7 @@ if __name__ == '__main__':
     root.grid_columnconfigure(0, weight = 1)
 
     ##### Product Frame #####
-    product_frame.grid_configure(columnspan=3, pady=30, padx=(110,30), sticky="w")
+    product_frame.grid_configure(column=2, columnspan=3, pady=30, padx=(30,30), sticky="e")
     var = tk.IntVar()
     versions = 'Bagel 1 -- $2.00', 'Bagel 2 -- $2.00', 'Bagel 3 -- $2.00', 'Bagel 4 -- $2.00', 'Bagel 5 -- $2.00', 'Bagel 6 -- $2.00' 
     imageName = "bagel1.png", "bagel2.png", "bagel3.png", "bagel4.png", "bagel5.png", "bagel6.png"
@@ -207,21 +186,29 @@ if __name__ == '__main__':
         colNo = colNo + 1
         i = i + 1
 
-    #right vertical frame - contains addOn_frame and personalInfo_frame
-    rightInfo_frame.grid_configure(row=1, column=0, columnspan=2, pady=30, padx=(0, 110), sticky="nw")
+    #cart vertical frame - contains addOn_frame and personalInfo_frame
+    cartInfo_frame.grid_configure(row=1, column=0, columnspan=2, pady=30, padx=(30, 110), sticky="nw")
 
     ##### GPU Additional Accessories Frame #####
     #accessories label and underline
-    addOn_frame.grid_configure(row=0, columnspan=4, pady=(10,0), padx=10, sticky="nw")
-    addOnLabel = ttk.Label(addOn_frame, style="My.TLabel", text="GPU Accessories")
+    addOn_frame.grid_configure(row=5, column=0, columnspan=4, pady=(30,30), padx=10, sticky="sw")
+    addOnLabel = ttk.Label(addOn_frame, style="My.TLabel", text="Shmears")
     addOnLabel.config(font = ('rockwell', 12))
     addOnLabel.grid(sticky="ns", column=0, columnspan=3)
     addOnUnderline_line.grid(sticky="ns", column=0, columnspan=2, pady=(0,5))
 
+    checkButtons_frame.grid_configure(row=5, column=0, columnspan=4, pady=(30,30), padx=10, sticky="se")
+    ttk.Button(checkButtons_frame, width=10, text = 'Add to Cart', cursor="hand2", command = (lambda: confirmation(completeForm))).grid(column=0, row=1, columnspan=1, pady=(5, 15), sticky="sw")
+    #checkButtonsLabel.config(font = ('rockwell', 12))
+    #checkButtonsLabel.grid(sticky="se", column=0, columnspan=3)
+    #checkButtonsUnderline_line.grid(sticky="se", column=0, columnspan=2, pady=(0,5))
+
+
+
     states = []
     amounts = []
     num = tk.IntVar()
-    buttons = 'GPU Support Bracket -- $15.00', 'SLI Bridge -- $50.00', 'Thermal Paste -- $20.00', 'GPU Backplate (Nickel) -- $50.00'
+    buttons = 'Strawbery Shmear -- $1.00', 'Blueberry Shmear -- $1.00', 'Cream Cheese -- $1.00', 'Butter -- $50.00'
     rowNo = 2
     colNo = 0
 
@@ -243,11 +230,6 @@ if __name__ == '__main__':
     costInfoLabel.grid(sticky="ns", column=0, columnspan=5)
     costInfoUnderline_line.grid(sticky="ns", column=0, columnspan=5)
 
-    #creates quantity scale
-    scaleVar = tk.IntVar()
-    ttk.Label(costInfo_frame, width = 20, text = "Quantity", style="My.TLabel").grid(row=2, column=0, sticky="nw", pady=(15,0), padx=(15,0))
-    ttk.Scale(costInfo_frame, from_=0, to=10, command=onMove, variable=scaleVar, cursor="hand2", style="My.Horizontal.TScale", length=250).grid(row=2, column=1, columnspan=3, sticky="nsw", pady=(15,0))
-
     completeForm = []
 
     #create cost info data
@@ -261,7 +243,12 @@ if __name__ == '__main__':
         i = i + 1
 
     root.bind('<Return>', (lambda event: fetch(ents)))
-    ttk.Button(rightInfo_frame, width=10, text = 'Submit', cursor="hand2", command = (lambda: confirmation(completeForm))).grid(column=0, columnspan=4, pady=(5, 15), sticky="ns")
+    ttk.Button(cartInfo_frame, width=10, text = 'Checkout', cursor="hand2", command = (lambda: confirmation(completeForm))).grid(column=0, columnspan=4, pady=(5, 15), sticky="ns")
+    ttk.Button(list_frame, width=10, text = 'testing', cursor="hand2", command = (lambda: confirmation(completeForm))).grid(column=0, columnspan=4, pady=(5, 15), sticky="ns")
+    shoppingList = tk.Listbox(cartInfo_frame)
+    #shoppingList = tk.Listbox(cartInfo_frame, width = 500, height = 500)
+    shoppingList.insert(END, 'Bagel1')
+    shoppingList.insert(END, 'Bagel2')
 
     root.grid_columnconfigure(0, weight = 1)
 
