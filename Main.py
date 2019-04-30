@@ -224,7 +224,7 @@ if __name__ == '__main__':
 
     ##### Cost Information Frame #####
     #cost info label and underline
-    costInfo_frame.grid_configure(row=1, columnspan=5, pady=10, padx=(50,0), sticky="nw")
+    costInfo_frame.grid_configure(row=1, columnspan=5, pady=10, padx=(30,30), sticky="nw")
     costInfoLabel = ttk.Label(costInfo_frame, style="My.TLabel", text="Cost Info")
     costInfoLabel.config(font = ('rockwell', 12))
     costInfoLabel.grid(sticky="ns", column=0, columnspan=5)
@@ -245,10 +245,15 @@ if __name__ == '__main__':
     root.bind('<Return>', (lambda event: fetch(ents)))
     ttk.Button(cartInfo_frame, width=10, text = 'Checkout', cursor="hand2", command = (lambda: confirmation(completeForm))).grid(column=0, columnspan=4, pady=(5, 15), sticky="ns")
     ttk.Button(list_frame, width=10, text = 'testing', cursor="hand2", command = (lambda: confirmation(completeForm))).grid(column=0, columnspan=4, pady=(5, 15), sticky="ns")
-    shoppingList = tk.Listbox(cartInfo_frame)
-    #shoppingList = tk.Listbox(cartInfo_frame, width = 500, height = 500)
-    shoppingList.insert(END, 'Bagel1')
-    shoppingList.insert(END, 'Bagel2')
+    shoppingList = tk.Text(cartInfo_frame, height = 10, width = 50)
+    listScroll = tk.Scrollbar(cartInfo_frame)
+    listScroll.grid(column=1, row=0, sticky="NSW", pady=10, padx=10)
+    shoppingList.grid_configure(row=0, column=0, pady=10, padx=10, sticky="n")
+    listScroll.config(command=shoppingList.yview)
+    shoppingList.config(yscrollcommand=listScroll.set)
+    for i in range(1,15):
+        boughtBagel = 'Bagel' + str(i) + '\n'
+        shoppingList.insert(tk.END, boughtBagel)
 
     root.grid_columnconfigure(0, weight = 1)
 
