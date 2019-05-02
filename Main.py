@@ -292,7 +292,7 @@ if __name__ == '__main__':
     root.bind('<Return>', (lambda event: fetch(ents)))
     ttk.Button(cartInfo_frame, width=10, text = 'Cash', cursor="hand2", command = cash).grid(column=0, columnspan=4, pady=(5, 5), sticky="s")
     ttk.Button(cartInfo_frame, width=10, text = 'Credit', cursor="hand2", command = credit).grid(column=0, columnspan=4, pady=(5, 5), sticky="s")
-    shoppingList = tk.Text(cartInfo_frame, height = 10, width = 50)
+    shoppingList = tk.Listbox(cartInfo_frame, height = 10, width = 50)
     listScroll = tk.Scrollbar(cartInfo_frame)
     listScroll.grid(column=1, row=0, sticky="NSW", pady=10, padx=10)
     shoppingList.grid_configure(row=0, column=0, pady=10, padx=10, sticky="n")
