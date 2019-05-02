@@ -198,7 +198,9 @@ if __name__ == '__main__':
     addOnUnderline_line.grid(sticky="ns", column=0, columnspan=2, pady=(0,5))
 
     checkButtons_frame.grid_configure(row=5, column=0, columnspan=4, pady=(30,30), padx=10, sticky="se")
-    ttk.Button(checkButtons_frame, width=10, text = 'Add to Cart', cursor="hand2", command = (lambda: confirmation(completeForm))).grid(column=0, row=1, columnspan=1, pady=(5, 15), sticky="sw")
+    blankButton = tk.PhotoImage(file= gifdir + "buttonblank.png")
+    cartButton = ttk.Button(checkButtons_frame, width=50, text = 'Add to Cart', cursor="hand2", command = (lambda: confirmation(completeForm))).grid(column=0, row=1, columnspan=1, pady=(5, 15), sticky="sw")
+    #cartButton.config(height=500, width=500)
     #checkButtonsLabel.config(font = ('rockwell', 12))
     #checkButtonsLabel.grid(sticky="se", column=0, columnspan=3)
     #checkButtonsUnderline_line.grid(sticky="se", column=0, columnspan=2, pady=(0,5))
@@ -224,9 +226,9 @@ if __name__ == '__main__':
 
     ##### Cost Information Frame #####
     #cost info label and underline
-    costInfo_frame.grid_configure(row=1, columnspan=5, pady=10, padx=(30,30), sticky="nw")
+    costInfo_frame.grid_configure(row=1, columnspan=5, pady=10, padx=(50,50), sticky="nw")
     costInfoLabel = ttk.Label(costInfo_frame, style="My.TLabel", text="Cost Info")
-    costInfoLabel.config(font = ('rockwell', 12))
+    costInfoLabel.config(font = ('times', 14))
     costInfoLabel.grid(sticky="ns", column=0, columnspan=5)
     costInfoUnderline_line.grid(sticky="ns", column=0, columnspan=5)
 
@@ -243,7 +245,8 @@ if __name__ == '__main__':
         i = i + 1
 
     root.bind('<Return>', (lambda event: fetch(ents)))
-    ttk.Button(cartInfo_frame, width=10, text = 'Checkout', cursor="hand2", command = (lambda: confirmation(completeForm))).grid(column=0, columnspan=4, pady=(5, 15), sticky="ns")
+    ttk.Button(cartInfo_frame, width=10, text = 'Cash', cursor="hand2", command = (lambda: confirmation(completeForm))).grid(column=0, columnspan=4, pady=(5, 5), sticky="s")
+    ttk.Button(cartInfo_frame, width=10, text = 'Credit', cursor="hand2", command = (lambda: confirmation(completeForm))).grid(column=0, columnspan=4, pady=(5, 5), sticky="s")
     ttk.Button(list_frame, width=10, text = 'testing', cursor="hand2", command = (lambda: confirmation(completeForm))).grid(column=0, columnspan=4, pady=(5, 15), sticky="ns")
     shoppingList = tk.Text(cartInfo_frame, height = 10, width = 50)
     listScroll = tk.Scrollbar(cartInfo_frame)
