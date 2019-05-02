@@ -54,13 +54,16 @@ def checkButtons(root):
         amounts.append(num)
 
 def onPress():
-        updateCosts(var.get(), list(map((lambda vars: vars.get()), states)))
+        #updateCosts(var.get(), list(map((lambda vars: vars.get()), states)))
         pick = var.get()
         print('You pressed', pick)
         print('Result:', pick)
 
+def addToCart():
+    print('Added to cart')
+
 def report():
-        updateCosts(var.get(), list(map((lambda vars: vars.get()), states)))
+        #updateCosts(var.get(), list(map((lambda vars: vars.get()), states)))
         print (var.get())
 
 def checkReport():
@@ -84,7 +87,6 @@ def cash():
     confirm_frame.grid_columnconfigure(0, weight = 1)
     w = tk.Label(confirm_frame, text = "Your order has been placed \n\nPlease pay at the register\n\nThank you")
     w.grid(pady=30, padx=30, sticky="n")
-    entryTitles = 'Subtotal Price','Discount', 'Tax', 'Total Price', 'Full name', 'Street address', 'City', 'State', 'Zip Code', 'Credit Card Number', 'CVC', 'Email'
     i = 0
     eRow = 0
     ttk.Button(confirm_frame, text = 'Close window', cursor="hand2", command=cashWindow.destroy).grid(column=0, pady=(5, 20), columnspan=2, sticky="ns")
@@ -113,7 +115,7 @@ def credit():
         #ttk.Label(confirm_frame).grid(row=rowNo + 1, column = colNo, pady=(10,20), padx=60, sticky="nw")
         colNo = colNo + 1
         i = i + 1
-    entryTitles = 'Subtotal Price','Discount', 'Tax', 'Total Price', 'Full name', 'Street address', 'City', 'State', 'Zip Code', 'Credit Card Number', 'CVC', 'Email'
+    entryTitles = 'Subtotal Price','Discount', 'Tax', 'Total Price'
     i = 0
     eRow = 0
     ttk.Button(confirm_frame, text = 'Confirm Order', cursor="hand2", command=creditWindow.destroy).grid(column=0, pady=(5, 20), columnspan=2, sticky="ns")
@@ -134,7 +136,7 @@ def makeform(root, fields):
 
 ##### Updates the cost of selections #####
 def updateCosts(primary, accessories = None):
-    quantity = scaleVar.get()
+    #quantity = scaleVar.get()
     print(primary)
     if(primary is not 0):
         if(primary is 1):
@@ -146,11 +148,7 @@ def updateCosts(primary, accessories = None):
         if(accessories is not None):
             accessoryCost = accessories[0]*15 + accessories[1]*50 + accessories[2]*20 + accessories[3]*50
         costs = []
-        costs.append(primaryCost * quantity + accessoryCost)
-        if(primaryCost * quantity + accessoryCost >= 1200):
-            costs.append(costs[0]*0.1)
-        else:
-            costs.append(costs[0] - costs[0])
+        #costs.append(primaryCost * quantity + accessoryCost)
         costs.append(costs[0]*.04)
         costs.append(costs[0] + costs[2] - costs[1])
         for i, costEnt in enumerate(costEntries):
@@ -243,7 +241,7 @@ if __name__ == '__main__':
 
     checkButtons_frame.grid_configure(row=5, column=0, columnspan=4, pady=(30,30), padx=10, sticky="se")
     blankButton = tk.PhotoImage(file= gifdir + "buttonblank.png")
-    cartButton = ttk.Button(checkButtons_frame, width=50, text = 'Add to Cart', cursor="hand2", command = (lambda: confirmation(completeForm))).grid(column=0, row=1, columnspan=1, pady=(5, 15), sticky="sw")
+    cartButton = ttk.Button(checkButtons_frame, width=50, text = 'Add to Cart', cursor="hand2", command = addToCart).grid(column=0, row=1, columnspan=1, pady=(5, 15), sticky="sw")
     #cartButton.config(height=500, width=500)
     #checkButtonsLabel.config(font = ('rockwell', 12))
     #checkButtonsLabel.grid(sticky="se", column=0, columnspan=3)
