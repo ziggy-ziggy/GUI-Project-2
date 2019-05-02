@@ -60,10 +60,12 @@ def onPress():
         print('Result:', pick)
 
 def addToCart():
-    print('Added to cart')
-
+    if(var.get() is not 0):
+        shoppingList.insert(tk.END, versions[var.get()-1])
+    
 def report():
         #updateCosts(var.get(), list(map((lambda vars: vars.get()), states)))
+        
         print (var.get())
 
 def checkReport():
@@ -252,7 +254,7 @@ if __name__ == '__main__':
     states = []
     amounts = []
     num = tk.IntVar()
-    buttons = 'Strawbery Shmear -- $1.00', 'Blueberry Shmear -- $1.00', 'Cream Cheese -- $1.00', 'Butter -- $50.00'
+    buttons = 'Strawberry Shmear -- $1.00', 'Blueberry Shmear -- $1.00', 'Cream Cheese -- $1.00', 'Butter -- $1.00'
     rowNo = 2
     colNo = 0
 
@@ -295,9 +297,6 @@ if __name__ == '__main__':
     shoppingList.grid_configure(row=0, column=0, pady=10, padx=10, sticky="n")
     listScroll.config(command=shoppingList.yview)
     shoppingList.config(yscrollcommand=listScroll.set)
-    for i in range(1,15):
-        boughtBagel = 'Bagel' + str(i) + '\n'
-        shoppingList.insert(tk.END, boughtBagel)
 
     root.grid_columnconfigure(0, weight = 1)
 
