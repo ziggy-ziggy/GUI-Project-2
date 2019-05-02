@@ -77,28 +77,47 @@ def checkAmount():
 
 ##### Cash Window #####
 def cash():
-    confirm = tk.Toplevel(root)
-    confirm.geometry("420x480")
-    confirm.title("Your Order Has Been Placed")
-    confirm_frame = ttk.Frame(confirm, style="My.TFrame", width=400, height=675)
+    cashWindow = tk.Toplevel(root)
+    cashWindow.geometry("420x480")
+    cashWindow.title("Your Order Has Been Placed")
+    confirm_frame = ttk.Frame(cashWindow, style="My.TFrame", width=400, height=675)
     confirm_frame.grid_configure(columnspan=2, pady=30, padx=30, sticky="ns")
     confirm_frame.grid_columnconfigure(0, weight = 1)
     entryTitles = 'Subtotal Price','Discount', 'Tax', 'Total Price', 'Full name', 'Street address', 'City', 'State', 'Zip Code', 'Credit Card Number', 'CVC', 'Email'
     i = 0
     eRow = 0
-    ttk.Button(confirm_frame, text = 'Confirm Order', cursor="hand2", command=confirm.destroy).grid(column=0, pady=(5, 20), columnspan=2, sticky="ns")
+    ttk.Button(confirm_frame, text = 'Confirm Order', cursor="hand2", command=cashWindow.destroy).grid(column=0, pady=(5, 20), columnspan=2, sticky="ns")
 
 def credit():
-    confirm = tk.Toplevel(root)
-    confirm.geometry("420x480")
-    confirm.title("Your Order Has Been Placed")
-    confirm_frame = ttk.Frame(confirm, style="My.TFrame", width=400, height=675)
+    creditWindow = tk.Toplevel(root)
+    creditWindow.geometry("420x480")
+    creditWindow.title("Your Order Has Been Placed")
+    confirm_frame = ttk.Frame(creditWindow, style="My.TFrame", width=400, height=675)
     confirm_frame.grid_configure(columnspan=2, pady=30, padx=30, sticky="ns")
     confirm_frame.grid_columnconfigure(0, weight = 1)
+    w = tk.Label(confirm_frame, text = "Your order has been placed \n\n\nThank you")
+    w.grid(pady=30, padx=30, sticky="n")
+    var = tk.IntVar()
+    versions = 'Tip - 5%', 'Tip - 10%', 'Tip - 15%', 'Tip - 20%' 
+    imag = []
+    i = 1
+    rowNo = 0
+    colNo = 0
+
+    #loop to display the product radio buttons and picture
+    for version in versions:
+        if i % 4 == 0:
+            rowNo = 2
+            colNo = 0
+        ttk.Radiobutton(confirm_frame, text = version, command = onPress, value = i, variable = var, style="My.TRadiobutton", cursor="hand2").grid(pady=2, padx=30, sticky="n")
+        #ttk.Radiobutton(confirm_frame, text = version, command = onPress, value = i, variable = var, style="My.TRadiobutton", cursor="hand2").grid(row=rowNo, column=colNo, pady=(10,0), padx=60, sticky="NW")
+        #ttk.Label(confirm_frame).grid(row=rowNo + 1, column = colNo, pady=(10,20), padx=60, sticky="nw")
+        colNo = colNo + 1
+        i = i + 1
     entryTitles = 'Subtotal Price','Discount', 'Tax', 'Total Price', 'Full name', 'Street address', 'City', 'State', 'Zip Code', 'Credit Card Number', 'CVC', 'Email'
     i = 0
     eRow = 0
-    ttk.Button(confirm_frame, text = 'Confirm Order', cursor="hand2", command=confirm.destroy).grid(column=0, pady=(5, 20), columnspan=2, sticky="ns")
+    ttk.Button(confirm_frame, text = 'Confirm Order', cursor="hand2", command=creditWindow.destroy).grid(column=0, pady=(5, 20), columnspan=2, sticky="ns")
 
 
 ##### Fills entries located in Information section #####
