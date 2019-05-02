@@ -20,7 +20,7 @@ from PIL import Image, ImageTk
 def helpBox():
     messagebox.showinfo('Help', 'Welcome to our store!\n 1. Select a product\n 2. Add accessories\n 3. Enter information')
 def studentBox():
-    messagebox.showinfo('Students', 'Austin Hochhalter\n Justin Glenn\n Jamison French\n Jacob Simondet\n')
+    messagebox.showinfo('Students', 'Austin Hochhale\n Justin Glenn\n Jamison French\n Jacob Simondet\n')
 def courseBox():
     messagebox.showinfo('Course', 'SE330: Human Factors & User Interface')
 def AssignmentBox():
