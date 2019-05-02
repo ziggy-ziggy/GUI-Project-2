@@ -163,7 +163,7 @@ if __name__ == '__main__':
     ##### Product Frame #####
     product_frame.grid_configure(column=2, columnspan=3, pady=30, padx=(30,30), sticky="e")
     var = tk.IntVar()
-    versions = 'Bagel 1 -- $2.00', 'Bagel 2 -- $2.00', 'Bagel 3 -- $2.00', 'Bagel 4 -- $2.00', 'Bagel 5 -- $2.00', 'Bagel 6 -- $2.00' 
+    versions = 'Blueberry Bagel -- $2.00', 'Plain Bagel -- $2.00', 'Seasame Bagel -- $2.00', 'Poppy Bagel -- $2.00', 'Onion Bagel -- $2.00', 'Pumpernickel Bagel -- $2.00' 
     imageName = "bagel1.png", "bagel2.png", "bagel3.png", "bagel4.png", "bagel5.png", "bagel6.png"
     gifdir = "images/"
     imag = []
