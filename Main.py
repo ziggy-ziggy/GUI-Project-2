@@ -78,28 +78,27 @@ def checkAmount():
 ##### Cash Window #####
 def cash():
     cashWindow = tk.Toplevel(root)
-    cashWindow.geometry("420x480")
     cashWindow.title("Your Order Has Been Placed")
-    confirm_frame = ttk.Frame(cashWindow, style="My.TFrame", width=400, height=675)
+    confirm_frame = ttk.Frame(cashWindow, style="My.TFrame")
     confirm_frame.grid_configure(columnspan=2, pady=30, padx=30, sticky="ns")
     confirm_frame.grid_columnconfigure(0, weight = 1)
+    w = tk.Label(confirm_frame, text = "Your order has been placed \n\nPlease pay at the register\n\nThank you")
+    w.grid(pady=30, padx=30, sticky="n")
     entryTitles = 'Subtotal Price','Discount', 'Tax', 'Total Price', 'Full name', 'Street address', 'City', 'State', 'Zip Code', 'Credit Card Number', 'CVC', 'Email'
     i = 0
     eRow = 0
-    ttk.Button(confirm_frame, text = 'Confirm Order', cursor="hand2", command=cashWindow.destroy).grid(column=0, pady=(5, 20), columnspan=2, sticky="ns")
+    ttk.Button(confirm_frame, text = 'Close window', cursor="hand2", command=cashWindow.destroy).grid(column=0, pady=(5, 20), columnspan=2, sticky="ns")
 
 def credit():
     creditWindow = tk.Toplevel(root)
-    creditWindow.geometry("420x480")
-    creditWindow.title("Your Order Has Been Placed")
+    creditWindow.title("Please confirm your order")
     confirm_frame = ttk.Frame(creditWindow, style="My.TFrame", width=400, height=675)
     confirm_frame.grid_configure(columnspan=2, pady=30, padx=30, sticky="ns")
     confirm_frame.grid_columnconfigure(0, weight = 1)
-    w = tk.Label(confirm_frame, text = "Your order has been placed \n\n\nThank you")
+    w = tk.Label(confirm_frame, text = "Please confirm your order \n\n\nThank you")
     w.grid(pady=30, padx=30, sticky="n")
     var = tk.IntVar()
-    versions = 'Tip - 5%', 'Tip - 10%', 'Tip - 15%', 'Tip - 20%' 
-    imag = []
+    versions = 'No tip', 'Tip - 5%', 'Tip - 10%', 'Tip - 15%', 'Tip - 20%' 
     i = 1
     rowNo = 0
     colNo = 0
