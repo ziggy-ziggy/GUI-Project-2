@@ -75,6 +75,32 @@ def checkAmount():
         print (list(map((lambda num: num.get()), amounts)))
 #######################################
 
+##### Cash Window #####
+def cash():
+    confirm = tk.Toplevel(root)
+    confirm.geometry("420x480")
+    confirm.title("Your Order Has Been Placed")
+    confirm_frame = ttk.Frame(confirm, style="My.TFrame", width=400, height=675)
+    confirm_frame.grid_configure(columnspan=2, pady=30, padx=30, sticky="ns")
+    confirm_frame.grid_columnconfigure(0, weight = 1)
+    entryTitles = 'Subtotal Price','Discount', 'Tax', 'Total Price', 'Full name', 'Street address', 'City', 'State', 'Zip Code', 'Credit Card Number', 'CVC', 'Email'
+    i = 0
+    eRow = 0
+    ttk.Button(confirm_frame, text = 'Confirm Order', cursor="hand2", command=confirm.destroy).grid(column=0, pady=(5, 20), columnspan=2, sticky="ns")
+
+def credit():
+    confirm = tk.Toplevel(root)
+    confirm.geometry("420x480")
+    confirm.title("Your Order Has Been Placed")
+    confirm_frame = ttk.Frame(confirm, style="My.TFrame", width=400, height=675)
+    confirm_frame.grid_configure(columnspan=2, pady=30, padx=30, sticky="ns")
+    confirm_frame.grid_columnconfigure(0, weight = 1)
+    entryTitles = 'Subtotal Price','Discount', 'Tax', 'Total Price', 'Full name', 'Street address', 'City', 'State', 'Zip Code', 'Credit Card Number', 'CVC', 'Email'
+    i = 0
+    eRow = 0
+    ttk.Button(confirm_frame, text = 'Confirm Order', cursor="hand2", command=confirm.destroy).grid(column=0, pady=(5, 20), columnspan=2, sticky="ns")
+
+
 ##### Fills entries located in Information section #####
 def makeform(root, fields):
     entries = []
@@ -245,9 +271,8 @@ if __name__ == '__main__':
         i = i + 1
 
     root.bind('<Return>', (lambda event: fetch(ents)))
-    ttk.Button(cartInfo_frame, width=10, text = 'Cash', cursor="hand2", command = (lambda: confirmation(completeForm))).grid(column=0, columnspan=4, pady=(5, 5), sticky="s")
-    ttk.Button(cartInfo_frame, width=10, text = 'Credit', cursor="hand2", command = (lambda: confirmation(completeForm))).grid(column=0, columnspan=4, pady=(5, 5), sticky="s")
-    ttk.Button(list_frame, width=10, text = 'testing', cursor="hand2", command = (lambda: confirmation(completeForm))).grid(column=0, columnspan=4, pady=(5, 15), sticky="ns")
+    ttk.Button(cartInfo_frame, width=10, text = 'Cash', cursor="hand2", command = cash).grid(column=0, columnspan=4, pady=(5, 5), sticky="s")
+    ttk.Button(cartInfo_frame, width=10, text = 'Credit', cursor="hand2", command = credit).grid(column=0, columnspan=4, pady=(5, 5), sticky="s")
     shoppingList = tk.Text(cartInfo_frame, height = 10, width = 50)
     listScroll = tk.Scrollbar(cartInfo_frame)
     listScroll.grid(column=1, row=0, sticky="NSW", pady=10, padx=10)
