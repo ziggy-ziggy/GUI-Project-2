@@ -16,7 +16,7 @@ from tkinter import messagebox, StringVar, OptionMenu
 from PIL import Image, ImageTk
 
 ShoppingCart = []
-Total = 0
+subTotal = 0
 
 #functions for menu
 def helpBox():
@@ -57,9 +57,28 @@ def updateCost():
 				
 		myTotal = myTotal + (2+count)*int(each[2])
 				
-	Total = myTotal
+	subTotal = myTotal
 
-	print("Total is "+ str(Total))
+	print("Total is "+ str(subTotal))
+	costEntries[0].config(state = tk.NORMAL)
+	costEntries[0].delete(0, tk.END)
+	dollars = '${:,.2f}'.format(subTotal)
+	costEntries[0].insert(0, dollars)
+	costEntries[0].config(state = tk.DISABLED)
+
+	Tax = subTotal * .04
+	costEntries[1].config(state = tk.NORMAL)
+	costEntries[1].delete(0, tk.END)
+	taxDollars = '${:,.2f}'.format(Tax)
+	costEntries[1].insert(0, taxDollars)
+	costEntries[1].config(state = tk.DISABLED)
+	
+	Total = subTotal + Tax
+	costEntries[2].config(state = tk.NORMAL)
+	costEntries[2].delete(0, tk.END)
+	totalDollars = '${:,.2f}'.format(Total)
+	costEntries[2].insert(0, totalDollars)
+	costEntries[2].config(state = tk.DISABLED)
 
 
 def checkButtons(root):
@@ -399,12 +418,12 @@ if __name__ == '__main__':
     completeForm = []
 
     #create cost info data
-    costFields = 'Subtotal','Discount', 'Tax', 'Total'
+    costFields = 'Subtotal', 'Tax', 'Total'
     costEntries = makeform(costInfo_frame, costFields)
     i = 0
     for costEnt in costEntries:
         completeForm.append(costEntries[i])
-        costEntries[i].insert(0, Total)
+        costEntries[i].insert(0, subTotal)
         costEntries[i].config(state=tk.DISABLED)
         i = i + 1
 
