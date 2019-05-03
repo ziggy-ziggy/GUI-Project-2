@@ -61,10 +61,32 @@ def onPress():
         print('You pressed', pick)
         print('Result:', pick)
 
+
+def insertCartIntoCartList():
+    for each in ShoppingCart:
+         shoppingList.insert(tk.END, str(each[0]) + "      Quantity: " + str(each[2])) # add it to the bottom!
+         #shoppingList.insert(tk.END, each[2])
+         for i in range(len(each[1])):
+
+            if(i== 0 and int((each[1][0])) == 1):
+                shoppingList.insert(tk.END, "    Straw Berry            $1.00" )
+                print("strawberry")
+            if(i == 1 and int((each[1][1])) == 1):
+                shoppingList.insert(tk.END, "    Blue Berry              $1.00" )
+                print("blueberry")
+            if(i == 2 and int((each[1][2])) == 1):
+                shoppingList.insert(tk.END, "    Cream Cheese      $1.00" )
+                print("creamcheese")
+            if(i == 3 and int((each[1][3])) == 1):
+                shoppingList.insert(tk.END, "    Butter                     $1.00" )
+                print("butter")
+
+            
+         
+        
+
 def addToCart():
     if(var.get() is not 0):
-
-        shoppingList.insert(tk.END, versions[var.get()-1])
 
         Shmears = list(map((lambda vars: vars.get()), states))
 
@@ -72,34 +94,53 @@ def addToCart():
 
         for each in Shmears:
             myShmears = myShmears + str(each)
+
+        found = False
+			
+        for each in ShoppingCart:
+            if (each[0] == versions[var.get()-1]) and (each[1] == myShmears):
+		#already entered
+		#increment the last values
+                each[2] = each[2]+1
+                found = True
+
+        if found: # clear the shopping List and reenter all the values
+            shoppingList.delete(0, 'end')
+            insertCartIntoCartList()
+		
+        else: #not found in Shopping Cart
+
+            #shoppingList.insert(tk.END, versions[var.get()-1]) # add it to the bottom!
         
-        ShoppingCart.append([versions[var.get()-1], myShmears])
+            ShoppingCart.append([versions[var.get()-1], myShmears, 1])
 
-        #for each in Shmears:
-         #   print(each)
+	    #for each in Shmears:
+	    #   print(each)
 
-        SmallList = [] 
-        SmallList.append([versions[var.get()-1], myShmears]) # alist of just the current entry for the for loop
-															# did it for simplicity since I wrote the code below
-        
-        for each in SmallList:
-            print("In cart")
-            print( str(each[0]))
+            SmallList = [] 
+            SmallList.append([versions[var.get()-1], myShmears, 1]) # alist of just the current entry for the for loop
+																# did it for simplicity since I wrote the code below
+			
+			
+            for each in SmallList:
+                print("In cart")
+                print( str(each[0]))
+                #shoppingList.insert(tk.END, each[2])
+                shoppingList.insert(tk.END, str(each[0]) + "      Quantity: " + str(each[2])) # add it to the bottom!
+                for i in range(len(each[1])):
 
-            for i in range(len(each[1])):
-
-                if(i== 0 and int((each[1][0])) == 1):
-                    shoppingList.insert(tk.END, "    Straw Berry            $1.00" )
-                    print("strawberry")
-                if(i == 1 and int((each[1][1])) == 1):
-                    shoppingList.insert(tk.END, "    Blue Berry              $1.00" )
-                    print("blueberry")
-                if(i == 2 and int((each[1][2])) == 1):
-                    shoppingList.insert(tk.END, "    Cream Cheese      $1.00" )
-                    print("creamcheese")
-                if(i == 3 and int((each[1][3])) == 1):
-                    shoppingList.insert(tk.END, "    Butter                     $1.00" )
-                    print("butter")
+                    if(i== 0 and int((each[1][0])) == 1):
+                        shoppingList.insert(tk.END, "    Straw Berry            $1.00" )
+                        print("strawberry")
+                    if(i == 1 and int((each[1][1])) == 1):
+                        shoppingList.insert(tk.END, "    Blue Berry              $1.00" )
+                        print("blueberry")
+                    if(i == 2 and int((each[1][2])) == 1):
+                        shoppingList.insert(tk.END, "    Cream Cheese      $1.00" )
+                        print("creamcheese")
+                    if(i == 3 and int((each[1][3])) == 1):
+                        shoppingList.insert(tk.END, "    Butter                     $1.00" )
+                        print("butter")
 
                 
                
