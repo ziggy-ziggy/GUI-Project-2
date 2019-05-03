@@ -198,7 +198,7 @@ def deleteCart():
         print("if nothing above, the cart was deleted!")
         # clear the list! on display!
         shoppingList.delete(0, 'end')
-
+        updateCost()
         
         
 def report():
@@ -229,7 +229,7 @@ def cash():
     w.grid(pady=30, padx=30, sticky="n")
     i = 0
     eRow = 0
-    ttk.Button(confirm_frame, text = 'Close window', cursor="hand2", command=cashWindow.destroy).grid(column=0, pady=(5, 20), columnspan=2, sticky="ns")
+    ttk.Button(confirm_frame, text = 'Confirm', cursor="hand2", command=cashWindow.destroy).grid(column=0, pady=(5, 20), columnspan=2, sticky="ns")
 
 def credit():
     creditWindow = tk.Toplevel(root)
@@ -259,7 +259,6 @@ def credit():
     i = 0
     eRow = 0
     ttk.Button(confirm_frame, text = 'Confirm Order', cursor="hand2", command=creditWindow.destroy).grid(column=0, pady=(5, 20), columnspan=2, sticky="ns")
-
 
 ##### Fills entries located in Information section #####
 def makeform(root, fields):
