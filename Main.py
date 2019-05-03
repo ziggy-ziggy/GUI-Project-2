@@ -106,10 +106,10 @@ def insertCartIntoCartList():
          for i in range(len(each[1])):
 
             if(i== 0 and int((each[1][0])) == 1):
-                shoppingList.insert(tk.END, "    Straw Berry            $1.00" )
+                shoppingList.insert(tk.END, "    Strawberry             $1.00" )
                 print("strawberry")
             if(i == 1 and int((each[1][1])) == 1):
-                shoppingList.insert(tk.END, "    Blue Berry              $1.00" )
+                shoppingList.insert(tk.END, "    Blueberry               $1.00" )
                 print("blueberry")
             if(i == 2 and int((each[1][2])) == 1):
                 shoppingList.insert(tk.END, "    Cream Cheese      $1.00" )
@@ -167,10 +167,10 @@ def addToCart():
                 for i in range(len(each[1])):
 
                     if(i== 0 and int((each[1][0])) == 1):
-                        shoppingList.insert(tk.END, "    Straw Berry            $1.00" )
+                        shoppingList.insert(tk.END, "    Strawberry             $1.00" )
                         print("strawberry")
                     if(i == 1 and int((each[1][1])) == 1):
-                        shoppingList.insert(tk.END, "    Blue Berry              $1.00" )
+                        shoppingList.insert(tk.END, "    Blueberry               $1.00" )
                         print("blueberry")
                     if(i == 2 and int((each[1][2])) == 1):
                         shoppingList.insert(tk.END, "    Cream Cheese      $1.00" )
