@@ -74,7 +74,7 @@ def checkButtons(root):
         amounts.append(num)
 
 def onPress():
-        updateCosts()
+        #updateCosts(var.get(), list(map((lambda vars: vars.get()), states)))
         pick = var.get()
         print('You pressed', pick)
         print('Result:', pick)
@@ -183,11 +183,7 @@ def deleteCart():
         
         
 def report():
-<<<<<<< HEAD
-        updateCosts()
-=======
     #updateCosts(var.get(), list(map((lambda vars: vars.get()), states)))
->>>>>>> a7762be4f3109cca642ae7460ef102287e725ebf
         
     print (var.get())
 
@@ -222,8 +218,27 @@ def credit():
     confirm_frame = ttk.Frame(creditWindow, style="My.TFrame", width=400, height=675)
     confirm_frame.grid_configure(columnspan=2, pady=30, padx=30, sticky="ns")
     confirm_frame.grid_columnconfigure(0, weight = 1)
-    w = tk.Label(confirm_frame, text = "Please confirm your order\n")
+    w = tk.Label(confirm_frame, text = "Please confirm your order \n\n\nThank you")
     w.grid(pady=30, padx=30, sticky="n")
+    var = tk.IntVar()
+    versions = 'No tip', 'Tip - 5%', 'Tip - 10%', 'Tip - 15%', 'Tip - 20%' 
+    i = 1
+    rowNo = 0
+    colNo = 0
+
+    #loop to display the product radio buttons and picture
+    for version in versions:
+        if i % 4 == 0:
+            rowNo = 2
+            colNo = 0
+        ttk.Radiobutton(confirm_frame, text = version, command = onPress, value = i, variable = var, style="My.TRadiobutton", cursor="hand2").grid(pady=2, padx=30, sticky="n")
+        #ttk.Radiobutton(confirm_frame, text = version, command = onPress, value = i, variable = var, style="My.TRadiobutton", cursor="hand2").grid(row=rowNo, column=colNo, pady=(10,0), padx=60, sticky="NW")
+        #ttk.Label(confirm_frame).grid(row=rowNo + 1, column = colNo, pady=(10,20), padx=60, sticky="nw")
+        colNo = colNo + 1
+        i = i + 1
+    entryTitles = 'Subtotal Price','Discount', 'Tax', 'Total Price'
+    i = 0
+    eRow = 0
     ttk.Button(confirm_frame, text = 'Confirm Order', cursor="hand2", command=creditWindow.destroy).grid(column=0, pady=(5, 20), columnspan=2, sticky="ns")
 
 
@@ -241,14 +256,33 @@ def makeform(root, fields):
     return entries
 
 ##### Updates the cost of selections #####
-def updateCosts():
+def updateCosts(primary, accessories = None):
     #quantity = scaleVar.get()
-    print(tipAmount)
-    #costEntries[2].insert(0, tipAmount*.5)
-    costEntries[2].config(state=tk.NORMAL)
-    costEntries[2].delete(0, tk.END)
-    costEntries[2].insert(0, tipAmount)
-    costEntries[2].config(state=tk.DISABLED)
+    print(primary)
+    if(primary is not 0):
+        if(primary is 1):
+            primaryCost = 1
+        else:
+            primaryCost = 1
+        accessoryCost = 0
+
+        if(accessories is not None):
+            accessoryCost = accessories[0]*15 + accessories[1]*50 + accessories[2]*20 + accessories[3]*50
+        costs = []
+        #costs.append(primaryCost * quantity + accessoryCost)
+        costs.append(costs[0]*.04)
+        costs.append(costs[0] + costs[2] - costs[1])
+        for i, costEnt in enumerate(costEntries):
+            dollars = '${:,.2f}'.format(costs[i])
+            costEnt.config(state=tk.NORMAL)
+            costEnt.delete(0, tk.END)
+            costEnt.insert(0, dollars)
+            costEnt.config(state=tk.DISABLED)
+    else:
+        costEntries[0].config(state=tk.NORMAL)
+        costEntries[0].delete(0, tk.END)
+        costEntries[0].insert(0, "Must have a bagel selected")
+        costEntries[0].config(state=tk.DISABLED)
 
 ##### Main #####
 if __name__ == '__main__':
@@ -290,10 +324,6 @@ if __name__ == '__main__':
     root.grid_columnconfigure(0, weight = 1)
 
     ##### Product Frame #####
-
-    #addOn_frame.grid_configure(row=5, column=0, columnspan=4, pady=(30,30), padx=10, sticky="sw")
-    
-    
     product_frame.grid_configure(column=2, columnspan=3, pady=30, padx=(30,30), sticky="e")
     var = tk.IntVar()
     versions = 'Blueberry Bagel -- $2.00', 'Plain Bagel -- $2.00', 'Seasame Bagel -- $2.00', 'Poppy Bagel -- $2.00', 'Onion Bagel -- $2.00', 'Pumpernickel Bagel -- $2.00' 
@@ -322,24 +352,22 @@ if __name__ == '__main__':
     #cart vertical frame - contains addOn_frame and personalInfo_frame
     cartInfo_frame.grid_configure(row=1, column=0, columnspan=2, pady=30, padx=(30, 110), sticky="nw")
 
-    ##### Shmear Frame #####
+    ##### GPU Additional Accessories Frame #####
     #accessories label and underline
     addOn_frame.grid_configure(row=5, column=0, columnspan=4, pady=(30,30), padx=10, sticky="sw")
-    addOnLabel = ttk.Label(addOn_frame, style="My.TLabel", text="Toppings")
-    addOnLabel.config(font = ('calibri', 16))
+    addOnLabel = ttk.Label(addOn_frame, style="My.TLabel", text="Shmears")
+    addOnLabel.config(font = ('rockwell', 12))
     addOnLabel.grid(sticky="ns", column=0, columnspan=3)
+    addOnUnderline_line.grid(sticky="ns", column=0, columnspan=2, pady=(0,5))
 
     checkButtons_frame.grid_configure(row=5, column=0, columnspan=4, pady=(30,30), padx=10, sticky="se")
     blankButton = tk.PhotoImage(file= gifdir + "buttonblank.png")
     cartButton = ttk.Button(checkButtons_frame, width=50, text = 'Add to Cart', cursor="hand2", command = addToCart).grid(column=0, row=1, columnspan=1, pady=(5, 15), sticky="sw")
-<<<<<<< HEAD
-=======
     deleteButton = ttk.Button(checkButtons_frame, width=50, text = 'Delete Entire Cart', cursor="hand2", command = deleteCart).grid(column=0, row=2, columnspan=1, pady=(5, 15), sticky="sw")
     #cartButton.config(height=500, width=500)
     #checkButtonsLabel.config(font = ('rockwell', 12))
     #checkButtonsLabel.grid(sticky="se", column=0, columnspan=3)
     #checkButtonsUnderline_line.grid(sticky="se", column=0, columnspan=2, pady=(0,5))
->>>>>>> a7762be4f3109cca642ae7460ef102287e725ebf
 
 
 
@@ -364,8 +392,9 @@ if __name__ == '__main__':
     #cost info label and underline
     costInfo_frame.grid_configure(row=1, columnspan=5, pady=10, padx=(50,50), sticky="nw")
     costInfoLabel = ttk.Label(costInfo_frame, style="My.TLabel", text="Cost Info")
-    costInfoLabel.config(font = ('calibri', 16))
+    costInfoLabel.config(font = ('times', 14))
     costInfoLabel.grid(sticky="ns", column=0, columnspan=5)
+    costInfoUnderline_line.grid(sticky="ns", column=0, columnspan=5)
 
     completeForm = []
 
@@ -381,23 +410,6 @@ if __name__ == '__main__':
 
     root.bind('<Return>', (lambda event: fetch(ents)))
     ttk.Button(cartInfo_frame, width=10, text = 'Cash', cursor="hand2", command = cash).grid(column=0, columnspan=4, pady=(5, 5), sticky="s")
-
-    tipAmount = tk.IntVar()
-    tips = 'No tip', 'Tip - 5%', 'Tip - 10%', 'Tip - 15%', 'Tip - 20%' 
-    i = 1
-    rowNo = 0
-    colNo = 0
-
-    #loop to display the tip radio buttons
-    for tip in tips:
-        if i % 2 == 0:
-            rowNo = 1
-            colNo = 0
-        ttk.Radiobutton(cartInfo_frame, text = tip, command = updateCosts, value = i, variable = tipAmount, style="My.TRadiobutton", cursor="hand2").grid(pady=2, padx=5, sticky="n")
-        colNo = colNo + 1
-        i = i + 1
-
-    
     ttk.Button(cartInfo_frame, width=10, text = 'Credit', cursor="hand2", command = credit).grid(column=0, columnspan=4, pady=(5, 5), sticky="s")
     shoppingList = tk.Listbox(cartInfo_frame, height = 10, width = 50)
     listScroll = tk.Scrollbar(cartInfo_frame)
