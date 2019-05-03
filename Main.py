@@ -375,7 +375,7 @@ if __name__ == '__main__':
     #accessories label and underline
     addOn_frame.grid_configure(row=5, column=0, columnspan=4, pady=(30,30), padx=10, sticky="sw")
     addOnLabel = ttk.Label(addOn_frame, style="My.TLabel", text="Shmears")
-    addOnLabel.config(font = ('rockwell', 12))
+    addOnLabel.config(font = ('times', 14))
     addOnLabel.grid(sticky="ns", column=0, columnspan=3)
     addOnUnderline_line.grid(sticky="ns", column=0, columnspan=2, pady=(0,5))
 
