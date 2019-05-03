@@ -15,6 +15,8 @@ import tkinter.ttk as ttk
 from tkinter import messagebox, StringVar, OptionMenu
 from PIL import Image, ImageTk
 
+ShoppingCart = []
+
 #functions for menu
 def helpBox():
     messagebox.showinfo('Help', "Welcome to Ken's Coffee and Bagels !\n 1. Select a bagel\n 2. Add shmears\n 3. Add to cart")
@@ -61,12 +63,70 @@ def onPress():
 
 def addToCart():
     if(var.get() is not 0):
+
         shoppingList.insert(tk.END, versions[var.get()-1])
-    
-def report():
-        #updateCosts(var.get(), list(map((lambda vars: vars.get()), states)))
+
+        Shmears = list(map((lambda vars: vars.get()), states))
+
+        myShmears = ""
+
+        for each in Shmears:
+            myShmears = myShmears + str(each)
         
-        print (var.get())
+        ShoppingCart.append([versions[var.get()-1], myShmears])
+
+        #for each in Shmears:
+         #   print(each)
+
+        SmallList = [] 
+        SmallList.append([versions[var.get()-1], myShmears]) # alist of just the current entry for the for loop
+															# did it for simplicity since I wrote the code below
+        
+        for each in SmallList:
+            print("In cart")
+            print( str(each[0]))
+
+            for i in range(len(each[1])):
+
+                if(i== 0 and int((each[1][0])) == 1):
+                    shoppingList.insert(tk.END, "    Straw Berry            $1.00" )
+                    print("strawberry")
+                if(i == 1 and int((each[1][1])) == 1):
+                    shoppingList.insert(tk.END, "    Blue Berry              $1.00" )
+                    print("blueberry")
+                if(i == 2 and int((each[1][2])) == 1):
+                    shoppingList.insert(tk.END, "    Cream Cheese      $1.00" )
+                    print("creamcheese")
+                if(i == 3 and int((each[1][3])) == 1):
+                    shoppingList.insert(tk.END, "    Butter                     $1.00" )
+                    print("butter")
+
+                
+               
+
+
+        
+
+        
+
+def deleteCart():
+        ShoppingCart.clear()
+
+        print("deleted shopping cart check")
+
+        for each in ShoppingCart:
+            print (each[0])
+
+        print("if nothing above, the cart was deleted!")
+        # clear the list! on display!
+        shoppingList.delete(0, 'end')
+
+        
+        
+def report():
+    #updateCosts(var.get(), list(map((lambda vars: vars.get()), states)))
+        
+    print (var.get())
 
 def checkReport():
         print (list(map((lambda vars: vars.get()), states)))
@@ -244,6 +304,7 @@ if __name__ == '__main__':
     checkButtons_frame.grid_configure(row=5, column=0, columnspan=4, pady=(30,30), padx=10, sticky="se")
     blankButton = tk.PhotoImage(file= gifdir + "buttonblank.png")
     cartButton = ttk.Button(checkButtons_frame, width=50, text = 'Add to Cart', cursor="hand2", command = addToCart).grid(column=0, row=1, columnspan=1, pady=(5, 15), sticky="sw")
+    deleteButton = ttk.Button(checkButtons_frame, width=50, text = 'Delete Entire Cart', cursor="hand2", command = deleteCart).grid(column=0, row=2, columnspan=1, pady=(5, 15), sticky="sw")
     #cartButton.config(height=500, width=500)
     #checkButtonsLabel.config(font = ('rockwell', 12))
     #checkButtonsLabel.grid(sticky="se", column=0, columnspan=3)
