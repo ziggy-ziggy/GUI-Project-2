@@ -16,6 +16,7 @@ from tkinter import messagebox, StringVar, OptionMenu
 from PIL import Image, ImageTk
 
 ShoppingCart = []
+Total = 0
 
 #functions for menu
 def helpBox():
@@ -44,6 +45,23 @@ def makeMenu(root):
 
 ##### Functions that check states #####
 #######################################
+def updateCost():
+	
+	myTotal = 0
+	
+	for each in ShoppingCart:
+		count = 0
+		for i in range(len(each[1])):
+			if(int(each[1][i]) == 1):
+				count = count + 1
+				
+		myTotal = myTotal + (2+count)*int(each[2])
+				
+	Total = myTotal
+
+	print("Total is "+ str(Total))
+
+
 def checkButtons(root):
     buttons = 'Strawbery Shmear -- $1.00', 'Blueberry Shmear -- $1.00', 'Cream Cheese -- $1.00', 'Butter -- $50.00'
     for button in buttons:
@@ -143,7 +161,7 @@ def addToCart():
                         print("butter")
 
                 
-               
+        updateCost()
 
 
         
@@ -386,7 +404,7 @@ if __name__ == '__main__':
     i = 0
     for costEnt in costEntries:
         completeForm.append(costEntries[i])
-        costEntries[i].insert(0, "$0.00")
+        costEntries[i].insert(0, Total)
         costEntries[i].config(state=tk.DISABLED)
         i = i + 1
 
