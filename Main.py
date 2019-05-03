@@ -63,21 +63,21 @@ def updateCost():
 	costEntries[0].config(state = tk.NORMAL)
 	costEntries[0].delete(0, tk.END)
 	dollars = '${:,.2f}'.format(subTotal)
-	costEntries[0].insert(0, dollars)
+	costEntries[0].insert(0, "Subtotal: " + dollars)
 	costEntries[0].config(state = tk.DISABLED)
 
 	Tax = subTotal * .04
 	costEntries[1].config(state = tk.NORMAL)
 	costEntries[1].delete(0, tk.END)
 	taxDollars = '${:,.2f}'.format(Tax)
-	costEntries[1].insert(0, taxDollars)
+	costEntries[1].insert(0, "Tax: " + taxDollars)
 	costEntries[1].config(state = tk.DISABLED)
 	
 	Total = subTotal + Tax
 	costEntries[2].config(state = tk.NORMAL)
 	costEntries[2].delete(0, tk.END)
 	totalDollars = '${:,.2f}'.format(Total)
-	costEntries[2].insert(0, totalDollars)
+	costEntries[2].insert(0, "Total: " + totalDollars)
 	costEntries[2].config(state = tk.DISABLED)
 
 
@@ -422,7 +422,12 @@ if __name__ == '__main__':
     i = 0
     for costEnt in costEntries:
         completeForm.append(costEntries[i])
-        costEntries[i].insert(0, subTotal)
+        if(i == 0):
+            costEntries[i].insert(0, "Subtotal: $0.00")
+        elif(i == 1):
+            costEntries[i].insert(0, "Tax: $0.00")
+        elif(i == 2):
+            costEntries[i].insert(0, "Total: $0.00")
         costEntries[i].config(state=tk.DISABLED)
         i = i + 1
 
